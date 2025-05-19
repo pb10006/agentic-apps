@@ -22,13 +22,6 @@ from llama_index.llms.openai import OpenAI
 
 load_dotenv()
 
-class TargetAudience(str, Enum):
-    general = 'general'
-    technical = 'technical'
-    business = 'business'
-    academic = 'academic'
-
-
 class LogEvent(Event):
     msg: str
     delta: bool = False
@@ -38,7 +31,7 @@ class EmailReviewerInput(StartEvent):
     email: str = Field(
         ..., description='The email content to be reviewed and corrected'
     )
-    target_audience: TargetAudience = Field(
+    target_audience: str = Field(
         ...,
         description='The target audience for the email, affecting the style of review',
     )

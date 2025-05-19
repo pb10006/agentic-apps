@@ -4,7 +4,6 @@ import os
 import asyncio
 from marketing_campaign.state import OverallState, ConfigModel
 from marketing_campaign import mailcomposer
-from marketing_campaign.email_reviewer import TargetAudience
 from agntcy_acp import AsyncACPClient, ApiClientConfiguration
 from agntcy_acp.acp_v0.async_client.api_client import ApiClient as AsyncApiClient
 
@@ -24,6 +23,10 @@ async def main():
         has_composer_completed=False
     )
 
+    target_audience = os.environ.get("TARGET_AUDIENCE")
+    if not target_audience:
+        target_audience = 'academic'
+
     marketing_campaign_id = os.environ.get("MARKETING_CAMPAIGN_ID", "")
     client_config = ApiClientConfiguration.fromEnvPrefix("MARKETING_CAMPAIGN_")
 
@@ -36,7 +39,7 @@ async def main():
             config=Config(configurable=ConfigModel(
                 recipient_email_address=os.environ["RECIPIENT_EMAIL_ADDRESS"],
                 sender_email_address=os.environ["SENDER_EMAIL_ADDRESS"],
-                target_audience=TargetAudience.academic
+                target_audience=target_audience
             ).model_dump())
         )
         async with AsyncApiClient(configuration=client_config) as api_client:

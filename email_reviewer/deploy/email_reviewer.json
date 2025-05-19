@@ -15,7 +15,6 @@
     "input": {
       "$defs": {
         "TargetAudience": {
-          "enum": ["general", "technical", "business", "academic"],
           "title": "TargetAudience",
           "type": "string"
         }

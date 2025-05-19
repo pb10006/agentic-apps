@@ -11,6 +11,11 @@ from langchain_core.runnables.config import RunnableConfig
 
 async def main():
     print("What marketing campaign do you want to create?")
+    
+    target_audience = os.environ.get("TARGET_AUDIENCE")
+    if not target_audience:
+        target_audience = 'academic'
+
     inputState = OverallState(
         messages=[],
         operation_logs=[],
@@ -22,7 +27,7 @@ async def main():
         configurable=ConfigModel(
                 recipient_email_address=os.environ["RECIPIENT_EMAIL_ADDRESS"],
                 sender_email_address=os.environ["SENDER_EMAIL_ADDRESS"],
-                target_audience=TargetAudience.academic
+                target_audience=target_audience
             ).model_dump()
         
         configurable["thread_id"] = "thread_id"

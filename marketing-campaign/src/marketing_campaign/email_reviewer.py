@@ -16,7 +16,7 @@ class InputSchema(BaseModel):
     email: str = Field(
         ..., description='The email content to be reviewed and corrected', title='Email'
     )
-    target_audience: TargetAudience = Field(
+    target_audience: str = Field(
         ...,
         description='The target audience for the email, affecting the style of review',
     )
@@ -35,7 +35,7 @@ class OutputSchema(BaseModel):
     )
 
 
-class TargetAudience(Enum):
+class _TargetAudience(Enum):
     general = 'general'
     technical = 'technical'
     business = 'business'

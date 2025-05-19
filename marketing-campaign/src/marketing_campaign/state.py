@@ -9,7 +9,6 @@ from marketing_campaign import email_reviewer
 class ConfigModel(BaseModel):
     recipient_email_address: str = Field(..., description="Email address of the email recipient")
     sender_email_address: str = Field(..., description="Email address of the email sender")
-    target_audience: email_reviewer.TargetAudience = Field(..., description="Target audience for the marketing campaign")
 
 class MailComposerState(BaseModel):
     input: Optional[mailcomposer.InputSchema] = None
@@ -35,7 +34,7 @@ class OverallState(BaseModel):
     has_sender_completed: Optional[bool] = None
     mailcomposer_state: Optional[MailComposerState] = None
     email_reviewer_state: Optional[MailReviewerState] = None
-    target_audience: Optional[email_reviewer.TargetAudience] = None
+    target_audience: Optional[str] = None
     sendgrid_state: Optional[SendGridState] = None
     recipient_email_address: Optional[str] = Field(
         None, description="Email address of the email recipient"

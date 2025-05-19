@@ -139,7 +139,6 @@
           "type": "object"
         },
         "TargetAudience": {
-          "enum": ["general", "technical", "business", "academic"],
           "title": "TargetAudience",
           "type": "string"
         },
